@@ -172,14 +172,21 @@
 					o.startView = 0;
 			}
 
+			o.selectionMode = o.selectionMode || $.fn.selectionModes.DAY;
 			switch (o.minViewMode){
 				case 1:
 				case 'months':
 					o.minViewMode = 1;
+					if (o.selectionMode < DPGlobal.selectionModes.MONTH) {
+						o.selectionMode = DPGlobal.selectionModes.MONTH;
+					}
 					break;
 				case 2:
 				case 'years':
 					o.minViewMode = 2;
+					if (o.selectionMode < DPGlobal.selectionModes.YEAR) {
+						o.selectionMode = DPGlobal.selectionModes.YEAR;
+					}
 					break;
 				default:
 					o.minViewMode = 0;
@@ -1040,7 +1047,41 @@
 					this.dates.remove(0);
 		},
 
+		_sanitizeDate: function(date) {
+			// Make sure date is valid for selection mode. For example, if you're using QUARTER, then you want
+			// to make sure the date is at the beginning of the calendar quarter (Jan 1, Apr 1, Jul 1 or Oct 1)
+			switch(this.o.selectionMode) {
+				case DPGlobal.selectionModes.YEAR:
+					date.setUTCMonth(0);
+					date.setUTCDate(1);
+					break;
+				case DPGlobal.selectionModes.HALF_YEAR:
+					var month = date.getUTCMonth();
+					date.setUTCMonth(Math.floor(month / 6) * 6);
+					date.setUTCDate(1);
+					break;
+				case DPGlobal.selectionModes.QUARTER:
+					var month = date.getUTCMonth();
+					date.setUTCMonth(Math.floor(month / 3) * 3);
+					date.setUTCDate(1);
+					break;
+				case DPGlobal.selectionModes.MONTH:
+					date.setUTCDate(1);
+					break;
+				case DPGlobal.selectionModes.WEEK:
+					var dayOfWeek = date.getUTCDay();
+					var daysAfterStartOfWeek = dayOfWeek - this.o.weekStart;
+					date.setUTCDate(date.getUTCDate() - daysAfterStartOfWeek);
+					break;
+				case DPGlobal.selectionModes.DAY:
+				default:
+					// Do nothing.
+					break;
+			}
+		},
+
 		_setDate: function(date, which){
+			this._sanitizeDate(date);
 			if (!which || which === 'date')
 				this._toggle_multidate(date && new Date(date));
 			if (!which || which  === 'view')
@@ -1400,6 +1441,21 @@
 			return this;
 	};
 
+	var viewModes = $.fn.datepicker.viewModes = {
+		MONTH: 0,
+		YEAR: 1,
+		DECADE: 2,
+	};
+
+	var selectionModes = $.fn.datepicker.selectionModes = {
+		DAY: 1,
+		WEEK: 2,
+		MONTH: 3,
+		QUARTER: 4,
+		HALF_YEAR: 5,
+		YEAR: 6
+	};
+
 	var defaults = $.fn.datepicker.defaults = {
 		autoclose: false,
 		beforeShowDay: $.noop,
@@ -1416,6 +1472,7 @@
 		multidateSeparator: ',',
 		orientation: "auto",
 		rtl: false,
+		selectionMode: selectionModes.DAY,
 		startDate: -Infinity,
 		startView: 0,
 		todayBtn: false,
@@ -1457,6 +1514,7 @@
 				navFnc: 'FullYear',
 				navStep: 10
 		}],
+		selectionModes: selectionModes,
 		isLeapYear: function(year){
 			return (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0));
 		},
