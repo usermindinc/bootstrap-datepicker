@@ -714,7 +714,9 @@
 			i = 0;
 			html.push('<tr><td colspan="7">');
 			while (i < 12){
-				if (i > 0 && i % 3 === 0 && this.o.selectionMode === DPGlobal.selectionModes.QUARTER) {
+				if (i > 0 
+						&& (i % 3 === 0 && this.o.selectionMode === DPGlobal.selectionModes.QUARTER
+								|| i % 6 === 0 && this.o.selectionMode === DPGlobal.selectionModes.HALF_YEAR)) {
 					html.push('</td></tr><tr><td colspan="7">');
 				}
 				html.push('<span class="month" data-month-index="'+i+'">'+dates[this.o.language].monthsShort[i++]+'</span>');
@@ -866,7 +868,8 @@
 			var selectionMode = this.o.selectionMode;
 			$.each(this.dates, function(i, d){
 				if (d.getUTCFullYear() === year) {
-					if (selectionMode === DPGlobal.selectionModes.QUARTER) {
+					if (selectionMode === DPGlobal.selectionModes.QUARTER
+						  || selectionMode === DPGlobal.selectionModes.HALF_YEAR) {
 						months.eq(d.getUTCMonth()).closest('tr').addClass('active');
 					} else {
 						months.eq(d.getUTCMonth()).addClass('active');
