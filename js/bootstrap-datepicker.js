@@ -809,8 +809,8 @@
 					sevenDaysFromPrevMonth.setDate(sevenDaysFromPrevMonth.getDate() + 7);
 
 					if (this.o.selectionMode === DPGlobal.selectionModes.WEEK
-						  && this.viewDate.getTime() >= prevMonth.getTime()
-						  && this.viewDate.getTime() < sevenDaysFromPrevMonth.getTime()) {
+						  && this.dates.length > 0 && this.dates[0].getTime() >= prevMonth.getTime()
+						  && this.dates.length > 0 && this.dates[0].getTime() < sevenDaysFromPrevMonth.getTime()) {
 						html.push('<tr class="active">');
 					} else {
 						html.push('<tr>');
