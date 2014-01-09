@@ -1007,6 +1007,12 @@
 						}
 						break;
 					case 'span':
+						if ((this.o.selectionMode === DPGlobal.selectionModes.QUARTER
+							   || this.o.selectionMode === DPGlobal.selectionModes.HALF_YEAR)
+							  && target.is('.disabled')) {
+							// Correct for chosing a range of months rather than just one.
+							target = target.closest('td').find('span').first();
+						}
 						if (!target.is('.disabled')){
 							this.viewDate.setUTCDate(1);
 							if (target.is('.month')){
@@ -1034,6 +1040,10 @@
 						}
 						break;
 					case 'td':
+						if (target.is('.day') && target.is('.disabled')
+							  && this.o.selectionMode === DPGlobal.selectionModes.WEEK) {
+							target = target.closest('tr').find('td').first();
+						}
 						if (target.is('.day') && !target.is('.disabled')){
 							day = parseInt(target.text(), 10)||1;
 							year = this.viewDate.getUTCFullYear();
