@@ -710,12 +710,17 @@
 		},
 
 		fillMonths: function(){
-			var html = '',
+			var html = [],
 			i = 0;
+			html.push('<tr><td colspan="7">');
 			while (i < 12){
-				html += '<span class="month">'+dates[this.o.language].monthsShort[i++]+'</span>';
+				if (i > 0 && i % 3 === 0 && this.o.selectionMode === DPGlobal.selectionModes.QUARTER) {
+					html.push('</td></tr><tr><td colspan="7">');
+				}
+				html.push('<span class="month" data-month-index="'+i+'">'+dates[this.o.language].monthsShort[i++]+'</span>');
 			}
-			this.picker.find('.datepicker-months td').html(html);
+			html.push('</td></tr>');
+			this.picker.find('.datepicker-months tbody').html(html.join(''));
 		},
 
 		setRange: function(range){
@@ -858,9 +863,15 @@
 							.end()
 						.find('span').removeClass('active');
 
+			var selectionMode = this.o.selectionMode;
 			$.each(this.dates, function(i, d){
-				if (d.getUTCFullYear() === year)
-					months.eq(d.getUTCMonth()).addClass('active');
+				if (d.getUTCFullYear() === year) {
+					if (selectionMode === DPGlobal.selectionModes.QUARTER) {
+						months.eq(d.getUTCMonth()).closest('tr').addClass('active');
+					} else {
+						months.eq(d.getUTCMonth()).addClass('active');
+					}
+				}
 			});
 
 			if (year < startYear || year > endYear){
@@ -997,7 +1008,7 @@
 							this.viewDate.setUTCDate(1);
 							if (target.is('.month')){
 								day = 1;
-								month = target.parent().find('span').index(target);
+								month = target.data('month-index');
 								year = this.viewDate.getUTCFullYear();
 								this.viewDate.setUTCMonth(month);
 								this._trigger('changeMonth', this.viewDate);

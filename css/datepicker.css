@@ -12,7 +12,7 @@
   border-radius: 4px;
   direction: ltr;
   /*
-	&.datepicker-selection-quarter,
+
 	&.datepicker-selection-half-year */
 
   /*.dow {
@@ -788,6 +788,82 @@ fieldset[disabled] .datepicker.datepicker-selection-week table tr.active:hover t
 }
 .datepicker.datepicker-selection-week table tr td {
   border-radius: 0px;
+}
+.datepicker.datepicker-selection-quarter .datepicker-months table tr:hover td {
+  background-color: #eeeeee;
+}
+.datepicker.datepicker-selection-quarter .datepicker-months table tr:hover td:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.datepicker.datepicker-selection-quarter .datepicker-months table tr:hover td:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td, .datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td:hover,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td:hover,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td:focus,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td:focus,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td:active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td:active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td.active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td.active,
+.open .dropdown-toggle .datepicker.datepicker-selection-quarter .datepicker-months table tr.active td,
+.open .dropdown-toggle .datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td:active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td:active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td.active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td.active,
+.open .dropdown-toggle .datepicker.datepicker-selection-quarter .datepicker-months table tr.active td,
+.open .dropdown-toggle .datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td {
+  background-image: none;
+}
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td.disabled,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td.disabled,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td[disabled],
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td[disabled],
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active td,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td.disabled:hover,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td.disabled:hover,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td[disabled]:hover,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td[disabled]:hover,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active td :hover,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td :hover,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td.disabled:focus,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td.disabled:focus,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td[disabled]:focus,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td[disabled]:focus,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active td :focus,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td :focus,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td.disabled:active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td.disabled:active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td[disabled]:active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td[disabled]:active,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active td :active,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td :active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td.disabled.active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td.disabled.active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active td[disabled].active,
+.datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td[disabled].active,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active td .active,
+fieldset[disabled] .datepicker.datepicker-selection-quarter .datepicker-months table tr.active:hover td .active {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.datepicker.datepicker-selection-quarter .datepicker-months table tr td span, .datepicker.datepicker-selection-quarter .datepicker-months table tr td span:hover {
+  width: 31%;
+  background-color: transparent;
 }
 .datepicker th.datepicker-switch {
   width: 145px;
