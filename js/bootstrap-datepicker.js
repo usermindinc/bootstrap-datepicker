@@ -1042,7 +1042,7 @@
 					case 'td':
 						if (target.is('.day') && target.is('.disabled')
 							  && this.o.selectionMode === DPGlobal.selectionModes.WEEK) {
-							target = target.closest('tr').find('td').first();
+							target = target.closest('tr').find('.day').first();
 						}
 						if (target.is('.day') && !target.is('.disabled')){
 							day = parseInt(target.text(), 10)||1;
