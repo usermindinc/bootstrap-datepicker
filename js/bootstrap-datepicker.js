@@ -113,6 +113,18 @@
 			this.picker.addClass('datepicker-rtl');
 		}
 
+		switch(this.o.selectionMode) {
+			case DPGlobal.selectionModes.WEEK:
+				this.picker.addClass('datepicker-selection-week');
+				break;
+			case DPGlobal.selectionModes.QUARTER:
+				this.picker.addClass('datepicker-selection-quarter');
+				break;
+			case DPGlobal.selectionModes.HALF_YEAR:
+				this.picker.addClass('datepicker-selection-half-year');
+				break;
+		}
+
 		this.viewMode = this.o.startView;
 
 		if (this.o.calendarWeeks)
@@ -736,7 +748,7 @@
 				date.getUTCDate() === today.getDate()){
 				cls.push('today');
 			}
-			if (this.dates.contains(date) !== -1)
+			if (this.dates.contains(date) !== -1 && this.o.selectionMode !== DPGlobal.selectionModes.WEEK)
 				cls.push('active');
 			if (date.valueOf() < this.o.startDate || date.valueOf() > this.o.endDate ||
 				$.inArray(date.getUTCDay(), this.o.daysOfWeekDisabled) !== -1){
@@ -783,9 +795,19 @@
 			nextMonth = nextMonth.valueOf();
 			var html = [];
 			var clsName;
-			while (prevMonth.valueOf() < nextMonth){
-				if (prevMonth.getUTCDay() === this.o.weekStart){
-					html.push('<tr>');
+
+			while(prevMonth.valueOf() < nextMonth) {
+				if (prevMonth.getUTCDay() === this.o.weekStart) {
+					var sevenDaysFromPrevMonth = new Date(prevMonth);
+					sevenDaysFromPrevMonth.setDate(sevenDaysFromPrevMonth.getDate() + 7);
+
+					if (this.o.selectionMode === DPGlobal.selectionModes.WEEK
+						  && this.viewDate.getTime() >= prevMonth.getTime()
+						  && this.viewDate.getTime() < sevenDaysFromPrevMonth.getTime()) {
+						html.push('<tr class="active">');
+					} else {
+						html.push('<tr>');
+					}
 					if (this.o.calendarWeeks){
 						// ISO 8601: First week contains first thursday.
 						// ISO also states week starts on Monday, but we can be more abstract here.
